@@ -2,7 +2,7 @@
 --- @module 'blink.cmp'
 --- @class blink.cmp.Source
 local source = {}
-local refs = require 'cmp-pandoc-references.references'
+local refs = require 'blink-cmp-pandoc-references.references'
 
 function source.new(opts)
   local self = setmetatable({}, { __index = source })
@@ -15,7 +15,8 @@ function source:enabled()
     or vim.o.filetype == 'markdown'
     or vim.o.filetype == 'rmd'
     or vim.o.filetype == 'quarto'
-    or vim.o.filetype == 'typst'
+  -- or vim.o.filetype == 'typst'
+  -- Dropping Typst support for the moment in order to simplify locating the bibliography file
 end
 
 function source:get_trigger_characters()

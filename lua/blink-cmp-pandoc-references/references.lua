@@ -37,7 +37,9 @@ end
 
 local function name_parse(name)
   -- NOTE: add logic dealing with suffixes?
-  if not name['non-dropping-particle'] then
+  if name.literal then
+    return name.literal
+  elseif not name['non-dropping-particle'] then
     return name.family
   else
     return name['non-dropping-particle'] .. ' ' .. name.family
@@ -85,7 +87,7 @@ local function parse_bib(filename, fields)
   for i = 1, table.maxn(bibentries) do
     local title = clean(bibentries[i].title) or ''
     local authors = clean(author_parse(bibentries[i].author)) or ''
-    local year = date_parse(bibentries[i].issued)
+    local year = date_parse(bibentries[i].issued) or ''
 
     local doc = { '**' .. title .. '**', '', '*' .. authors .. '*', year }
 
